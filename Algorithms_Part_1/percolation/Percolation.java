@@ -11,6 +11,7 @@ public class Percolation{
 	private int numOpenSites;
 
 	public Percolation(int n){
+		if (n < 1) throw new IllegalArgumentException();
 		this.n = n;
 		qu = new WeightedQuickUnionUF(n*n+2);
 		opened = new boolean[n+1][n+1];
@@ -20,7 +21,7 @@ public class Percolation{
 			}	
 		}
 		top = 0;
-		bottom = n+1;
+		bottom = n*n+1;
 		numOpenSites = 0;
 	}
 
@@ -34,7 +35,7 @@ public class Percolation{
 		if (row == 1){
 			qu.union(doubleToSingle(row, col), top);
 		}
-		else if (row == n){
+		if (row == n){
 			qu.union(doubleToSingle(row, col), bottom);
 		}
 
